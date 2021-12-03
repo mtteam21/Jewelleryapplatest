@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Fragments.ProductFragment">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/earring"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                >
+                <TextView
+                    android:layout_marginTop="90dp"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:layout_marginStart="25dp"
+                    android:layout_width="wrap_content"
+                    android:text="Earrings"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:overScrollMode="never"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/productswithCategoryList"/>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

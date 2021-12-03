@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SearchFragment">
+
+    <include
+        android:id="@+id/toolBView"
+        android:layout_gravity="top"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="start"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productRecyclerView"/>
+
+
+</LinearLayout>

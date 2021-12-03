@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#E4E4E4"
+    android:orientation="vertical"
+    android:gravity="start"
+    tools:context=".Fragments.HomeFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:indeterminateTint="@color/black"
+        android:layout_centerInParent="true"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewPage"
+    android:layout_width="match_parent"
+        android:visibility="gone"
+    android:layout_gravity="start"
+    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_gravity="start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewpager"
+                            android:layout_marginTop="2dp"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:layout_margin="2dp"/>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
+            android:overScrollMode="never"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/productRecyclerView"/>
+                </LinearLayout>
+<!--        </ScrollView>-->
+</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

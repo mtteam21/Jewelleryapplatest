@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    app:cardElevation="3dp"
+    android:layout_height="65dp">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+       <CheckBox
+           android:id="@+id/selectOneFromList"
+           android:layout_marginStart="10dp"
+           android:buttonTint="@color/purple_200"
+           android:gravity="center_vertical"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginStart="5dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/addressLine"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="742, Gouashal Marg,"
+                android:textStyle="bold"
+                android:textColor="@color/purple_200"
+                android:textSize="16dp"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

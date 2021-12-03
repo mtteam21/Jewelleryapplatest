@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+    android:gravity="center"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+        android:layout_height="wrap_content">
+
+       <RelativeLayout
+           android:background="@drawable/rounded_dot"
+           android:layout_width="15dp"
+           android:layout_height="15dp"/>
+
+
+        <TextView
+            android:foreground="?attr/selectableItemBackground"
+            android:id="@+id/childCName"
+            android:textColor="@color/purple_200"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Earrings"/>
+
+        <ImageView
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/next_24"
+            app:tint="@color/purple_200"/>
+
+    </LinearLayout>

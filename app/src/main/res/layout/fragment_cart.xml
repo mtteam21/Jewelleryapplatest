@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Fragments.CartFragment">
+
+
+    <LinearLayout
+        android:background="@drawable/round_from_bottom"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items"
+            android:textSize="24sp"
+            android:textColor="@color/white"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:id="@+id/cartProductRecyclerView"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="25dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Order Summery"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_marginStart="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Total Price"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:gravity="end"
+               android:visibility="invisible"
+                    android:layout_marginEnd="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Rs: 2400"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="invisible"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginStart="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Order Summery"
+                    android:textSize="10sp"
+                    android:textColor="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:gravity="end"
+
+                    android:layout_marginEnd="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Rs: 40"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/changeAddressCard"
+                    app:cardCornerRadius="10dp"
+                    android:layout_height="40dp">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:visibility="gone"
+                            android:textColor="@color/purple_200"
+                            android:textSize="8sp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:text="Total Amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+
+                        <TextView
+                            android:textColor="@color/purple_200"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:text="Change Address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:id="@+id/checkOutCardView"
+                    app:cardCornerRadius="10dp"
+                    android:layout_height="40dp">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/placeOrderTextView"
+                            android:layout_marginStart="10dp"
+                            android:textColor="@color/purple_200"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:text="Next"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/red_arrow"/>
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </LinearLayout>
+
+</LinearLayout>

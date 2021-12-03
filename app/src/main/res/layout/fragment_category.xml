@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/round_from_bottom"
+    tools:context=".Fragments.CategoryFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:indeterminateTint="@color/white"
+        android:layout_centerInParent="true"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewPage"
+        android:layout_width="match_parent"
+        android:overScrollMode="never"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:layout_margin="2dp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:overScrollMode="never"
+        android:layout_height="match_parent"
+        android:id="@+id/productCategoryRecyclerView"/>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>
