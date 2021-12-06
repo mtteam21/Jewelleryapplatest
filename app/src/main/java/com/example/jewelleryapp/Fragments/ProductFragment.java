@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.jewelleryapp.Adapters.ProductAdapter;
@@ -39,6 +40,7 @@ public class ProductFragment extends Fragment implements ProductSubCategoriwiseA
     private View v;
     private RecyclerView recyclerView;
     private List<Product> productList;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -46,6 +48,8 @@ public class ProductFragment extends Fragment implements ProductSubCategoriwiseA
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_product, container, false);
         recyclerView = v.findViewById(R.id.productswithCategoryList);
+        progressBar = v.findViewById(R.id.progressBar);
+
         fetchProducts(this);
         return v;
     }
@@ -72,7 +76,7 @@ public class ProductFragment extends Fragment implements ProductSubCategoriwiseA
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 Product res = new Product();
-
+               progressBar.setVisibility(View.GONE);
                 Log.e("|||===||||", res.getCategory() + res.getName() + response.raw().toString() + response.body().toString());
                 if(response.isSuccessful()) {
                     Log.e("|||===||||", res.getCategory() + res.getName()+ response.raw().toString() + response.body().toString());
@@ -84,6 +88,7 @@ public class ProductFragment extends Fragment implements ProductSubCategoriwiseA
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -38,6 +38,7 @@ public class ChildCategoryAdapter extends RecyclerView.Adapter<ChildCategoryAdap
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+
                itemClickListener.onItemClick(productsLists.get(position));
            }
        });

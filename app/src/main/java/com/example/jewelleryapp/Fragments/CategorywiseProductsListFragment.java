@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jewelleryapp.Adapters.ChildCategoryAdapter;
@@ -56,6 +57,7 @@ public class CategorywiseProductsListFragment extends Fragment implements ChildC
     private ViewPager2 viewPager2;
     private Activity mActivity;
     private int c;
+    private TextView subcNameTv;
     public CategorywiseProductsListFragment() {
         // Required empty public constructor
     }
@@ -69,6 +71,9 @@ public class CategorywiseProductsListFragment extends Fragment implements ChildC
         recyclerView = v.findViewById(R.id.categoriwiseitemsList);
         viewPager2 = v.findViewById(R.id.viewpager);
         viewPager2.setVisibility(View.GONE);
+        subcNameTv = v.findViewById(R.id.subcNameViewTextV);
+
+
 
         fetchProductsList(this);
 
@@ -117,6 +122,7 @@ public class CategorywiseProductsListFragment extends Fragment implements ChildC
     @Override
     public void onItemClick(ChildCategoryList productsList) {
         ProductFragment bookFragment = new ProductFragment();
+        subcNameTv.setText(productsList.getChildccame());
         AppCompatActivity activity = (AppCompatActivity) v.getContext();
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
     }

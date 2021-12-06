@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.jewelleryapp.Adapters.ProductAdapter;
@@ -27,12 +29,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DetailsMenuItemActivity extends AppCompatActivity {
     private WebView webView;
     private List<DataModel> dataModelslist;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_menu_item);
 
         webView = findViewById(R.id.webView);
+        progressBar = findViewById(R.id.progressBar);
 
         loadData();
 
@@ -55,19 +59,17 @@ public class DetailsMenuItemActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<DataModel>> call, Response<List<DataModel>> response) {
                 dataModelslist = response.body();
-
                 if(response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
                     Log.e("Response",response.body().toString());
                     Log.e("|||===||||", response.raw().toString() + response.body().get(0).getPrivacy().toString());
-
                     webView.loadDataWithBaseURL(null, response.body().get(0).getPrivacy(), "text/html", "UTF-8", null);
                 }
-
             }
 
             @Override
             public void onFailure(Call<List<DataModel>> call, Throwable t) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 

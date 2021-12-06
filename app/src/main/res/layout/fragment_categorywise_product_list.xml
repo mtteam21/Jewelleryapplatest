@@ -8,6 +8,7 @@
     android:background="@drawable/round_from_bottom"
     tools:context=".Fragments.CategorywiseProductsListFragment">
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:overScrollMode="never"
@@ -28,6 +29,7 @@
         android:layout_margin="2dp"/>
 
     <ImageView
+        android:visibility="gone"
         android:layout_marginTop="14dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/categoryImage"
@@ -37,8 +39,9 @@
         app:tint="@color/white" />
 
     <TextView
+        android:id="@+id/subcNameViewTextV"
         android:layout_marginTop="5dp"
-        android:text="Women"
+        android:text=""
         android:textSize="18sp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"

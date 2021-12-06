@@ -28,6 +28,7 @@
         android:text="Approx Gross Wt:"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/weightDetailsTv"
         android:textColor="@color/black"
         android:textSize="12sp"

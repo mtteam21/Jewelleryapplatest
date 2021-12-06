@@ -47,9 +47,6 @@
                         android:visibility="gone"
                         app:tint="@color/black" />
 
-                    <tag android:value="ZoomableViewTag" />
-
-
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewpager"
                         android:layout_width="match_parent"
@@ -823,6 +820,7 @@
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
+                    android:visibility="invisible"
                     android:id="@+id/addtoCart"
                     android:layout_width="0dp"
                     android:layout_height="30dp"

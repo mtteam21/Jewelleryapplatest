@@ -199,11 +199,9 @@ public class CartFragment extends Fragment {
 
     private void startOrder() {
 
-
         for (int i = 0; i <= listItem.size(); i++) {
 
             try {
-
 
                 Retrofit retrofit1 = new Retrofit.Builder()
                         .baseUrl(BASE_URL) // Specify your api here
