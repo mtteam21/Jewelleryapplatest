@@ -11,8 +11,10 @@ import com.example.jewelleryapp.Model.P_Details_A;
 import com.example.jewelleryapp.Model.P_Details_B;
 import com.example.jewelleryapp.Model.Product;
 import com.example.jewelleryapp.Model.SliderItem;
+import com.example.jewelleryapp.Model.StoreOrder;
 import com.example.jewelleryapp.Model.StoreVariantsDetails;
 import com.example.jewelleryapp.Model.Subcategory;
+import com.example.jewelleryapp.Model.UpdateProfile;
 import com.example.jewelleryapp.Model.User;
 import com.example.jewelleryapp.Model.UserLogin;
 
@@ -28,6 +30,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
+
 
     @POST("/jewellery/capi/p_user_login.php")
     Call<Res> login(@Body User user);
@@ -69,8 +72,12 @@ public interface ApiInterface {
     @GET("p_get_menu_details.php")
     Call<List<DataModel>> getData();
 
-    @POST("store_products_orders.php")
+    @POST("store_variants.php")
     Call<Res> storeVariantsList(@Body StoreVariantsDetails storeVariantsDetails);
+
+    @POST("store_products_orders.php")
+    Call<Res> storeProductOrders(@Body StoreOrder storeOrder);
+
 
     @GET("get_address.php")
     Call<ArrayList<AddressModel>> getAddressList(@Query("id") int id);
@@ -78,7 +85,7 @@ public interface ApiInterface {
     @POST("p_address_user.php")
     Call<Res> storeAddress(@Body AddressModel addressModel);
 
-    @PUT("update_profile.php")
-    Call<Res> update_Profile(@Body UserLogin user);
+    @POST("update_profile.php")
+    Call<Res> update_Profile(@Body UpdateProfile updateProfile);
 
 }

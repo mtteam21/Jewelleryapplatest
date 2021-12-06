@@ -18,6 +18,13 @@ public class StoreVariantsDetails {
     @SerializedName("aid")
     private String aid;
 
+    public StoreVariantsDetails(String product, String price, String user_id, String variants, String aid) {
+        this.product = product;
+        this.price = price;
+        this.user_id = user_id;
+        this.variants = variants;
+        this.aid = aid;
+    }
 
     public String getAid() {
         return aid;
@@ -27,13 +34,7 @@ public class StoreVariantsDetails {
         this.aid = aid;
     }
 
-    public StoreVariantsDetails(String product, String price, String user_id, String variants) {
-        this.product = product;
-        this.price = price;
-        this.user_id = user_id;
-        this.variants = variants;
 
-    }
 
     public String getProduct() {
         return product;

@@ -2,6 +2,7 @@ package com.example.jewelleryapp.Fragments;
 
 import static com.example.jewelleryapp.Retrofit.ApiUtils.BASE_URL;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.jewelleryapp.AllActivities.MainActivity;
+import com.example.jewelleryapp.Model.UpdateProfile;
 import com.example.jewelleryapp.Model.User;
 import com.example.jewelleryapp.Model.UserLogin;
 import com.example.jewelleryapp.R;
@@ -69,17 +72,28 @@ public class ProfileFragment extends Fragment {
 
                 ApiInterface api1 = retrofit.create(ApiInterface.class);
 
-                UserLogin userLogin = new UserLogin(userId,userName,userEmail,userNumber,0,"","","","","");
+//                userId,userName,userEmail,userNumber
+                UpdateProfile updateProfile = new UpdateProfile(nameEditText.getText().toString(),emailEditText.getText().toString(),phoneNumEditText.getText().toString(),userId);
 
-                Call<Res> call = api1.update_Profile(userLogin);
-                Log.e("UserUpdate",new Gson().toJson(userLogin));
+                Call<Res> call = api1.update_Profile(updateProfile);
+                Log.e("UserUpdate",new Gson().toJson(updateProfile));
                 call.enqueue(new Callback<Res>() {
                     @Override
                     public void onResponse(Call<Res> call, Response<Res> response) {
-                        Log.e("UserLogin1",new Gson().toJson(response.body().getResponseMsg()));
+                        Log.e("UserUpdate",new Gson().toJson(response.body().getResponseMsg()));
                         Log.e("|||===|||", String.valueOf(userId) + response.body().toString());
                         if(response.isSuccessful()){
-                            Toast.makeText(v.getContext(), response.body().getResponseMsg(), Toast.LENGTH_SHORT).show();
+
+
+                                tinyDB = new TinyDB(getContext());
+
+                            tinyDB.putString("username",nameEditText.getText().toString());
+                            tinyDB.putString("email",emailEditText.getText().toString());
+                            tinyDB.putString("mobile",phoneNumEditText.getText().toString());
+                             startActivity(new Intent(v.getContext(),MainActivity.class));
+
+
+                            Toast.makeText(v.getContext(),"Profile Update", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

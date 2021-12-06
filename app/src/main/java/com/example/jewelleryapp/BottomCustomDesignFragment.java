@@ -225,7 +225,7 @@ public class BottomCustomDesignFragment extends BottomSheetDialogFragment implem
         int UID = tinyDB.getInt("id");
 
         listItem.add(new StoreVariantsDetails(String.valueOf(productId)
-                ,"0",String.valueOf(UID),String.valueOf(idslist)+","+String.valueOf(selectedItemPos)));
+                ,"0",String.valueOf(UID),String.valueOf(idslist)+","+String.valueOf(selectedItemPos),""));
 
         Log.e("DatId",String.valueOf(idslist+","+selectedItemPos));
     }

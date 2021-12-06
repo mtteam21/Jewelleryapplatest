@@ -45,6 +45,7 @@ public class AddressFragment extends Fragment implements AddressAdapter.ItemClic
     private int productId;
     private String productName;
     private String productImg;
+    private String qty;
     private AddressAdapter.ItemClickListener itemClickListener;
     public AddressFragment() {
         // Required empty public constructor
@@ -62,6 +63,8 @@ public class AddressFragment extends Fragment implements AddressAdapter.ItemClic
 //            addressId = Integer.parseInt(getArguments().getString("aid"));
             productName = getArguments().getString("product_name");
             productImg = getArguments().getString("product_img");
+            qty = getArguments().getString("qty");
+
 
         }
 
@@ -85,6 +88,7 @@ public class AddressFragment extends Fragment implements AddressAdapter.ItemClic
                     bundle.putInt("product_id",productId);
                     bundle.putString("product_name",productName);
                     bundle.putString("product_img",productImg);
+                    bundle.putString("qty",qty);
                     bookFragment.setArguments(bundle);
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();

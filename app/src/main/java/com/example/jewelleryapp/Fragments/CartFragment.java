@@ -34,6 +34,7 @@ import com.example.jewelleryapp.AllActivities.MainActivity;
 import com.example.jewelleryapp.Model.AddressModel;
 import com.example.jewelleryapp.Model.CartProduct;
 import com.example.jewelleryapp.Model.ProductCategory;
+import com.example.jewelleryapp.Model.StoreOrder;
 import com.example.jewelleryapp.Model.StoreVariantsDetails;
 import com.example.jewelleryapp.R;
 import com.example.jewelleryapp.Retrofit.ApiInterface;
@@ -57,7 +58,8 @@ public class CartFragment extends Fragment {
     private CartAdapter categoryAdapter;
     private List<CartProduct> categoriesList;
     private CardView checkOutCard,changeAddress;
-    private int productId,qty;
+    private int productId;
+    private String qty;
     private String productName;
     private String productImg;
     private String addressId="0";
@@ -93,11 +95,9 @@ public class CartFragment extends Fragment {
             addressId = getArguments().getString("aid");
             productName = getArguments().getString("product_name");
             productImg = getArguments().getString("product_img");
-            try {
-                qty = Integer.parseInt(getArguments().getString("qty"));
-            }catch (NumberFormatException e){
-                e.printStackTrace();
-            }
+
+                qty = getArguments().getString("qty");
+
         }
 
         try {
@@ -110,98 +110,132 @@ public class CartFragment extends Fragment {
     }
 
     private void clickListeners() {
-            checkOutCard.setOnClickListener(new View.OnClickListener() {
+
+
+
+        checkOutCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(listItem.size()!=0) {
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(BASE_URL) // Specify your api here
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                        if (placeOrderTextView.getText().toString().equals("Next") && listItem.size()!=00) {
+                            AddressFragment bookFragment = new AddressFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("product_id", productId);
+                            bundle.putString("product_name", productName);
+                            bundle.putString("product_img", productImg);
+                            bundle.putString("qty", String.valueOf(qty));
+                            bookFragment.setArguments(bundle);
+                            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
+                        } else {
+                            if (listItem.size() != 0) {
 
-                    ApiInterface api1 = retrofit.create(ApiInterface.class);
+                                Retrofit retrofit = new Retrofit.Builder()
+                                        .baseUrl(BASE_URL) // Specify your api here
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
 
-                    uId = tinyDB.getInt("id");
+                                ApiInterface api1 = retrofit.create(ApiInterface.class);
 
-                    Call<ArrayList<AddressModel>> getAddressesList = api1.getAddressList(uId);
+                                uId = tinyDB.getInt("id");
+                                qty = getArguments().getString("qty");
 
-                    getAddressesList.enqueue(new Callback<ArrayList<AddressModel>>() {
-                        @Override
-                        public void onResponse(Call<ArrayList<AddressModel>> call, Response<ArrayList<AddressModel>> response) {
-                            if (response.isSuccessful()) {
-                                addressModelsList = response.body();
-                                if (addressModelsList.size() == 0 && addressId.equals("0") && addressId==null) {
-                                    Toast.makeText(v.getContext(), "Please Add Address", Toast.LENGTH_SHORT).show();
-                                    AddAddressFragment bookFragment = new AddAddressFragment();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("product_id", productId);
-                                    bundle.putString("product_name", productName);
-                                    bundle.putString("product_img", productImg);
-                                    bundle.putString("qty",String.valueOf(qty));
-                                    bookFragment.setArguments(bundle);
-                                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().add(R.id.flFragment, bookFragment).addToBackStack(null).commit();
-                                }
-                                else if
-                                (addressModelsList.size() > 1 && addressId == null) {
-                                    Toast.makeText(v.getContext(), "Please Select Address", Toast.LENGTH_SHORT).show();
-                                    AddressFragment bookFragment = new AddressFragment();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putInt("product_id", productId);
-                                    bundle.putString("product_name", productName);
-                                    bundle.putString("product_img", productImg);
-                                    bundle.putString("qty",String.valueOf(qty));
-                                    bookFragment.setArguments(bundle);
-                                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
-                                }
-                                else {
-                                    startOrder();
-                                }
+                                Call<ArrayList<AddressModel>> getAddressesList = api1.getAddressList(uId);
 
+                                getAddressesList.enqueue(new Callback<ArrayList<AddressModel>>() {
+                                    @Override
+                                    public void onResponse(Call<ArrayList<AddressModel>> call, Response<ArrayList<AddressModel>> response) {
+                                        if (response.isSuccessful()) {
+                                            addressModelsList = response.body();
+
+                                            if (addressId == null) {
+                                                if (addressModelsList.size() > 1) {
+                                                    Toast.makeText(v.getContext(), "Please Select Address", Toast.LENGTH_SHORT).show();
+                                                    AddressFragment bookFragment = new AddressFragment();
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putInt("product_id", productId);
+                                                    bundle.putString("product_name", productName);
+                                                    bundle.putString("product_img", productImg);
+                                                    bundle.putString("qty", String.valueOf(qty));
+                                                    bookFragment.setArguments(bundle);
+                                                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
+                                                }
+
+                                            }
+
+                                            if (addressModelsList.size() == 0 && addressId.equals("0") && addressId == null) {
+                                                Toast.makeText(v.getContext(), "Please Add Address", Toast.LENGTH_SHORT).show();
+                                                AddAddressFragment bookFragment = new AddAddressFragment();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putInt("product_id", productId);
+                                                bundle.putString("product_name", productName);
+                                                bundle.putString("product_img", productImg);
+                                                bundle.putString("qty", String.valueOf(qty));
+                                                bookFragment.setArguments(bundle);
+                                                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                                                activity.getSupportFragmentManager().beginTransaction().add(R.id.flFragment, bookFragment).addToBackStack(null).commit();
+                                            } else if
+                                            (addressModelsList.size() > 1 && addressId == null) {
+                                                Toast.makeText(v.getContext(), "Please Select Address", Toast.LENGTH_SHORT).show();
+                                                AddressFragment bookFragment = new AddressFragment();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putInt("product_id", productId);
+                                                bundle.putString("product_name", productName);
+                                                bundle.putString("product_img", productImg);
+                                                bundle.putString("qty", String.valueOf(qty));
+                                                bookFragment.setArguments(bundle);
+                                                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                                                activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
+                                            } else {
+                                                startOrder();
+                                            }
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ArrayList<AddressModel>> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                            if (listItem.size() == 0) {
+                                Toast.makeText(v.getContext(), "Don't Have Any Product In Your Cart", Toast.LENGTH_SHORT).show();
                             }
                         }
 
-                        @Override
-                        public void onFailure(Call<ArrayList<AddressModel>> call, Throwable t) {
-
-                        }
-                    });
-
-                    }else{
-                    Toast.makeText(v.getContext(), "Don't Have Any Product In Your Cart", Toast.LENGTH_SHORT).show();
-                }
-
-
                 }
             });
-        changeAddress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(listItem.size()!=0){
-                AddressFragment bookFragment = new AddressFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("product_id",productId);
-                bundle.putString("product_name",productName);
-                bundle.putString("product_img",productImg);
-                bundle.putString("qty",String.valueOf(qty));
-                bookFragment.setArguments(bundle);
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
-                }else{
-                    Toast.makeText(v.getContext(), "Don't Have Any Product In Your Cart", Toast.LENGTH_SHORT).show();
+        if(listItem.size()!=0) {
+            changeAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listItem.size() != 0) {
+                        AddressFragment bookFragment = new AddressFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("product_id", productId);
+                        bundle.putString("product_name", productName);
+                        bundle.putString("product_img", productImg);
+                        bundle.putString("qty", String.valueOf(qty));
+                        bookFragment.setArguments(bundle);
+                        AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, bookFragment).addToBackStack(null).commit();
+                    } else {
+                        Toast.makeText(v.getContext(), "Don't Have Any Product In Your Cart", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 
     private void startOrder() {
 
+
         for (int i = 0; i <= listItem.size(); i++) {
 
-            try {
+
 
                 Retrofit retrofit1 = new Retrofit.Builder()
                         .baseUrl(BASE_URL) // Specify your api here
@@ -212,18 +246,22 @@ public class CartFragment extends Fragment {
 
                 try {
                     showDialog(getActivity(),"");
-                    StoreVariantsDetails storeVariantsDetails = new StoreVariantsDetails(String.valueOf(productId),"0",String.valueOf(uId),String.valueOf(listItem.get(i).getVariants()));
+                    StoreVariantsDetails storeVariantsDetails = new StoreVariantsDetails(String.valueOf(productId),"0",String.valueOf(uId),String.valueOf(listItem.get(i).getVariants()),String.valueOf(qty));
                     Call<Res> call1 = api.storeVariantsList(storeVariantsDetails);
 
-//                    Log.e("||RES||",String.valueOf(productId)+"0"+String.valueOf(uId)+String.valueOf(listItem.get(i).getVariants())+addressId+String.valueOf(qty));
+//                  Log.e("||RES||",String.valueOf(productId)+"0"+String.valueOf(uId)+String.valueOf(listItem.get(i).getVariants())+addressId+String.valueOf(qty));
 
-
+                    Log.e("---BB---",new Gson().toJson(storeVariantsDetails));
                     call1.enqueue(new Callback<Res>() {
                         @Override
                         public void onResponse(Call<Res> call, Response<Res> response) {
                             if(response.isSuccessful()){
                                                  Log.e("---ST DETAILS---",new Gson().toJson(storeVariantsDetails));
+
+
                                                  Log.e("SUCCESS",response.raw().toString() + response.body().toString());
+
+
                             }
 
                         }
@@ -235,11 +273,34 @@ public class CartFragment extends Fragment {
                 }catch (IndexOutOfBoundsException e){
                     e.printStackTrace();
                 }
-
-            } catch (IndexOutOfBoundsException e) {
-                e.printStackTrace();
-            }
         }
+
+        storeProductOrders();
+    }
+
+    private void storeProductOrders() {
+        Retrofit retrofit1 = new Retrofit.Builder()
+                .baseUrl(BASE_URL) // Specify your api here
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiInterface api1 = retrofit1.create(ApiInterface.class);
+        StoreOrder storeOrder = new StoreOrder(addressId,String.valueOf(qty),String.valueOf(productId),"0",String.valueOf(uId));
+        Call<Res> call1 = api1.storeProductOrders(storeOrder);
+        Log.e("---DATA---",new Gson().toJson(storeOrder));
+        call1.enqueue(new Callback<Res>() {
+            @Override
+            public void onResponse(Call<Res> call, Response<Res> response) {
+                Log.e("---BB---",new Gson().toJson(storeOrder));
+                if(response.isSuccessful()){
+                    Log.e("PRODUCT STORED",response.raw().toString() + response.body().toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<Res> call, Throwable t) {
+                Log.e("PRODUCT STORED",t.getMessage().toString());
+            }
+        });
     }
 
     private void fetchProductsCartProduct() {
@@ -247,6 +308,7 @@ public class CartFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
         categoriesList = new ArrayList<>();
+
         if(getArguments()!=null) {
             categoriesList.add(new CartProduct(getArguments().getString("product_img"), getArguments().getString("product_name"), "", ""));
         }else{
@@ -282,5 +344,6 @@ public class CartFragment extends Fragment {
             }
         }, 3000);
     }
+
 
 }
